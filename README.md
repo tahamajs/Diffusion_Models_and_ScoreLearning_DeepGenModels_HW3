@@ -1,167 +1,176 @@
-# ELBO-KL-Diffusion-ScoreBased-DGM-HW3
 
-## 📌 Table of Contents
+# **Diffusion and Score-Based Generative Models - Deep Generative Models HW3**
 
-- [Introduction](#introduction)
-- [Course Information](#course-information)
-- [Assignment Details](#assignment-details)
-- [Sections Overview](#sections-overview)
-  - [Diffusion Models](#diffusion-models)
-  - [Score-Based Models](#score-based-models)
-- [Implementation Details](#implementation-details)
-- [Mathematical Derivations](#mathematical-derivations)
-- [Training and Experimentation](#training-and-experimentation)
-- [Submission Guidelines](#submission-guidelines)
-- [Academic Integrity Policy](#academic-integrity-policy)
-- [License](#license)
+**University of Tehran** | **Department of Electrical and Computer Engineering**
+
+ **Course** : Deep Generative Models |  **Instructor** : Dr. Mostafa Tavasoli |  **Term** : Fall 1403
+
+ **Author** : *Taha Majlesi*
+
+ **Email** : [taha.maj4@gmail.com](mailto:taha.maj4@gmail.com) | [tahamajlesi@ut.ac.ir](mailto:tahamajlesi@ut.ac.ir)
+
+ **Profiles** : [LinkedIn](https://www.linkedin.com/in/tahamajlesi/) | [GitHub](https://github.com/tahamajs) | [Hugging Face](https://huggingface.co/tahamajs/plamma)
 
 ---
 
-## 📝 Introduction
+## **Table of Contents**
 
-This repository contains **Homework 3** for the **Deep Generative Models** course at the **University of Tehran**. This assignment covers **cutting-edge generative models**, including:
-
-- **Diffusion-based models** (DDPM, DDIM)
-- **Score-based generative models**
-- **Langevin dynamics for probabilistic modeling**
-- **FID evaluation and training efficiency comparisons**
-
-This assignment provides **both theoretical and practical** components, allowing students to explore **modern generative models** and implement them efficiently in Python.
-
----
-
-## 🎓 Course Information
-
-- **University**: University of Tehran
-- **Department**: Electrical and Computer Engineering
-- **Course**: Deep Generative Models
-- **Instructor**: Dr. Mostafa Tavasoli
-- **Term**: Fall 1403
+* [Introduction](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#introduction)
+* [Course Information](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#course-information)
+* [Assignment Details](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#assignment-details)
+* [Sections Overview](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#sections-overview)
+  * [Diffusion Models](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#diffusion-models)
+  * [Score-Based Generative Models](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#score-based-generative-models)
+* [Implementation Details](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#implementation-details)
+* [Mathematical Derivations](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#mathematical-derivations)
+* [Training and Experimentation](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#training-and-experimentation)
+* [Results and Analysis](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#results-and-analysis)
+* [Submission Guidelines](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#submission-guidelines)
+* [License](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#license)
+* [Project Structure](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#project-structure)
 
 ---
 
-## 🏆 Assignment Details
+## **Introduction**
 
-This homework consists of **two major sections**:
+This repository contains **Homework 3** for the **Deep Generative Models** course at the  **University of Tehran** . The assignment covers  **two major generative modeling techniques** :
 
-### 🔹 **1. Diffusion Models (DDPM & DDIM)**:
+* **Diffusion-Based Models** :
+* **DDPM (Denoising Diffusion Probabilistic Models)**
+* **DDIM (Denoising Diffusion Implicit Models)**
+* **Forward and Backward Diffusion Processes**
+* **Score-Based Generative Models** :
+* Learning probability densities using **score functions**
+* **Sliced Score Matching (SSM)**
+* **Langevin Dynamics for Sampling**
 
-- **Understanding Diffusion Models** (Forward and Backward Processes)
-- **Implementing and comparing DDPM & DDIM**
-- **Training on the Sprites dataset**
-- **Computing FID for evaluation**
-
-### 🔹 **2. Score-Based Generative Models**:
-
-- **Mathematical derivation of score functions**
-- **Implementing Langevin dynamics for sampling**
-- **Comparing different noise perturbation strategies**
-- **Training and evaluating score-based models**
+This assignment provides **both theoretical and practical** components to help students gain hands-on experience with  **modern generative techniques** .
 
 ---
 
-## 📂 Sections Overview
+## **Course Information**
 
-### 🔥 **Diffusion Models**
-
-Diffusion models are a **powerful class of generative models** that add noise to data in a **forward process** and then learn to reverse this corruption through a **backward process**.
-
-#### ✅ **Tasks:**
-
-1. **Mathematical Properties of Diffusion Models**:
-
-   - Prove why diffusion does not need **iterative noise addition**.
-   - Explain why **Gaussian assumptions** hold in the reverse process.
-   - Analyze the loss function of **DDPM** and why some terms are omitted.
-2. **Implementing DDPM & DDIM**:
-
-   - Implement the **DDPM forward process**.
-   - Train **DDPM & DDIM** on the **Sprites dataset**.
-   - Compare **sampling speed** and **FID scores** for both models.
-3. **Optimizing Sampling Speed**:
-
-   - Implement **DDPM-ES** (Efficient Sampling).
-   - Compare its effectiveness in reducing **sampling steps**.
+* **University** : University of Tehran
+* **Department** : Electrical and Computer Engineering
+* **Course** : Deep Generative Models
+* **Instructor** : Dr. Mostafa Tavasoli
+* **Term** : Fall 1403
 
 ---
 
-### 🔥 **Score-Based Models**
+## **Assignment Details**
 
-Score-based models **estimate probability distributions** by learning **gradient fields** rather than explicit densities.
+This homework consists of  **two main sections** :
 
-#### ✅ **Tasks:**
+### **1. Diffusion Models**
 
-1. **Theoretical Analysis**:
+* Understanding **Forward and Backward Diffusion**
+* Implementing **DDPM and DDIM**
+* Training a **Diffusion Model on the Sprites Dataset**
+* Comparing **DDPM and DDIM sampling efficiency**
+* Implementing **FID (Frechet Inception Distance) for evaluation**
 
-   - Understand how **score functions** approximate distributions.
-   - Explain why **Langevin dynamics** is needed for sampling.
-2. **Implementing a Score-Based Model**:
+### **2. Score-Based Generative Models**
 
-   - Train a model to estimate **score functions** on **Mixture of Gaussians**.
-   - Implement **Langevin dynamics** for generative sampling.
-3. **Comparing Noise Schedules**:
-
-   - Train models with **different noise levels**.
-   - Analyze how noise affects **sampling accuracy**.
-
----
-
-## ⚙️ Implementation Details
-
-### **🔹 Dataset**
-
-- The dataset used is **Sprites 16x16** (for diffusion models).
-- For score-based models, a **Mixture of Gaussians** is used.
-- **80/20 train-test split**.
-
-### **🔹 Diffusion Model Architecture**
-
-| **Component**       | **Details** |
-| ------------------------- | ----------------- |
-| **Base Model**      | UNet              |
-| **Timesteps**       | 1000 (DDPM)       |
-| **Noise Scheduler** | Linear            |
-| **Training Loss**   | MSE               |
-
-### **🔹 Training Parameters**
-
-| Parameter     | Value  |
-| ------------- | ------ |
-| Learning Rate | 0.0002 |
-| Batch Size    | 64     |
-| Epochs        | 500    |
-
-### **🔹 Score-Based Model Loss**
-
-\[
-L(\theta) = \frac{1}{2} \mathbb{E}_{p(x)} \left[ s_\theta(x)^2 \right] + \mathbb{E}_{p(x)} \left[ \nabla_x s_\theta(x) \right]
-\]
+* Understanding **Score Matching**
+* Implementing **Sliced Score Matching (SSM)**
+* **Noise Perturbation Techniques** for learning the score function
+* Implementing **Langevin Dynamics Sampling**
 
 ---
 
-## 📊 Mathematical Derivations
+## **Sections Overview**
 
-### **1️⃣ Diffusion Forward and Backward Processes**
+### **Diffusion Models**
 
-- Show that **iterative noise addition** is unnecessary in DDPM.
+Diffusion models progressively **add noise** to data in a **forward process** and learn to **reverse this process** to generate new samples.
 
-### **2️⃣ Why is Langevin Dynamics Needed?**
+#### **Tasks:**
 
-- Score models require **iterative updates** for generating samples.
-
-### **3️⃣ Computing FID Score**
-
-- FID measures **feature space similarity** between real and generated samples:
-  $$
-  FID = ||\mu_r - \mu_g||^2 + Tr(\Sigma_r + \Sigma_g - 2(\Sigma_r \Sigma_g)^{1/2})
-  $$
+1. **Understanding Diffusion Models**
+   * Explain the **Markov process** in forward diffusion.
+   * Prove that adding Gaussian noise results in a normal distribution.
+2. **Implementing DDPM and DDIM**
+   * Implement **DDPM training** on the  **Sprites dataset** .
+   * Implement **DDIM sampling** and compare results with DDPM.
+3. **Training a Noise Scheduler**
+   * Implement a **linear noise scheduler** to control diffusion.
+4. **Sampling from a Trained Model**
+   * Compare **DDPM and DDIM** in terms of **sampling speed** and quality.
+   * Use **FID score** for quantitative evaluation.
 
 ---
 
-## 🚀 Training and Experimentation
+### **Score-Based Generative Models**
 
-1. **Train DDPM & DDIM** and compare **sample efficiency**.
-2. **Train Score-Based Models** and evaluate **sampling quality**.
-3. **Compute FID scores** to compare models.
+Score-based models learn to **model probability distributions** using **score functions** instead of explicit density functions.
+
+#### **Tasks:**
+
+1. **Understanding Score-Based Models**
+   * Explain how **Score Matching** differs from standard generative models.
+   * Compare  **Diffusion Models vs. Score-Based Models** .
+2. **Implementing Score Matching**
+   * Implement **Sliced Score Matching (SSM)** to learn score functions.
+   * Train a model using  **noise perturbation techniques** .
+3. **Sampling Using Langevin Dynamics**
+   * Implement **Langevin Dynamics Sampling** to generate samples.
+   * Compare **Langevin Sampling** with Diffusion Sampling.
+4. **Evaluating Model Performance**
+   * Visualize results using **scatter plots** and  **density estimates** .
+   * Compare different  **perturbation noise levels** .
+
+---
+
+## **Implementation Details**
+
+### **Dataset**
+
+* **Diffusion Models** : **Sprites dataset** (16x16 pixel game character images)
+* **Score-Based Models** : **Mixture of Gaussians**
+
+### **DDPM/DDIM Training Parameters**
+
+| Parameter      | Value  |
+| -------------- | ------ |
+| Learning Rate  | 0.0002 |
+| Batch Size     | 64     |
+| Training Steps | 50,000 |
+
+### **Score Matching Model Parameters**
+
+| Parameter     | Value     |
+| ------------- | --------- |
+| Noise Levels  | [1, 3, 7] |
+| Learning Rate | 0.001     |
+| Batch Size    | 128       |
+
+---
+
+## **Mathematical Derivations**
+
+1. **Forward Diffusion Process**
+   * Derive the  **Markov transition probabilities** .
+   * Prove that **adding Gaussian noise** leads to a normal distribution.
+2. **Score Matching Equations**
+   * Explain how **Sliced Score Matching (SSM)** reduces complexity.
+   * Compare  **SSM vs. Vanilla Score Matching** .
+3. **Langevin Dynamics**
+   * Show why **Langevin Sampling** converges to the true distribution.
+
+---
+
+## **Training and Experimentation**
+
+1. **Train DDPM and DDIM** on the Sprites dataset.
+2. **Compare DDPM vs. DDIM Sampling Time** .
+3. **Train a Score-Based Model** on a  **Mixture of Gaussians** .
+4. **Visualize Langevin Sampling Convergence** .
+
+## **License**
+
+This project is licensed under the  **MIT License** .
+
+For more details, see the [LICENSE](https://chatgpt.com/c/LICENSE) file.
 
 ---
